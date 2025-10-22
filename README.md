@@ -43,50 +43,6 @@ Un portafolio web moderno y responsivo desarrollado con tecnologías web estánd
 - Loading screen animado
 - Notificaciones toast
 
-## 🚀 Instalación y Uso
-
-### Requisitos
-- Navegador web moderno
-- Servidor web local (opcional)
-
-### Instalación Local
-
-1. **Clonar el repositorio**
-   ```bash
-   git clone https://github.com/OsmanAndree/portfolio.git
-   cd portfolio
-   ```
-
-2. **Servir localmente**
-   ```bash
-   # Con Python
-   python -m http.server 8000
-   
-   # Con Node.js
-   npm run serve
-   
-   # Con PHP
-   php -S localhost:8000
-   ```
-
-3. **Abrir en navegador**
-   ```
-   http://localhost:8000
-   ```
-
-## 📁 Estructura del Proyecto
-
-```
-portfolio/
-├── index.html          # Página principal
-├── styles.css          # Estilos principales
-├── script.js           # JavaScript funcional
-├── sw.js              # Service Worker para PWA
-├── manifest.json      # Configuración PWA
-├── package.json       # Metadatos del proyecto
-└── README.md          # Documentación
-```
-
 ## 🎨 Personalización
 
 ### Colores
@@ -112,21 +68,6 @@ const observer = new IntersectionObserver((entries) => {
   // Lógica de animaciones
 });
 ```
-
-## 📊 Performance
-
-- **Lighthouse Score**: 95+ en todas las métricas
-- **First Contentful Paint**: < 1.5s
-- **Largest Contentful Paint**: < 2.5s
-- **Cumulative Layout Shift**: < 0.1
-
-## 🔧 PWA Features
-
-- **Service Worker**: Cache de recursos para funcionamiento offline
-- **Web App Manifest**: Instalable como app nativa
-- **Responsive Design**: Adaptable a cualquier pantalla
-- **Fast Loading**: Optimizado para conexiones lentas
-
 ## 📱 Compatibilidad
 
 - ✅ Chrome 80+
