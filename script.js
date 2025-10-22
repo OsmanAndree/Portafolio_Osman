@@ -286,120 +286,245 @@ filterBtns.forEach((btn) => {
   });
 });
 
-// SISTEMA DE ANIMACIONES PROFESIONALES Y SUAVES
-console.log('🎬 Sistema de animaciones profesionales iniciado');
+// SISTEMA 100% JAVASCRIPT - SIN CSS ANIMATIONS
+console.log('🚀 Sistema 100% JavaScript iniciado');
 
-// Contadores con easing suave
-function animateCounters() {
-    const counters = document.querySelectorAll('.stat-number');
-    counters.forEach((counter, index) => {
-        const target = parseInt(counter.getAttribute('data-target'));
-        let current = 0;
-        const duration = 2000;
+// Función para animar elementos con JavaScript puro
+function animateElement(element, startProps, endProps, duration, easing = 'easeOut') {
+    return new Promise((resolve) => {
         const startTime = performance.now();
         
-        setTimeout(() => {
-            function animateCounter(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                
-                // Easing suave (ease-out)
-                const easedProgress = 1 - Math.pow(1 - progress, 3);
-                
-                current = Math.floor(target * easedProgress);
-                counter.textContent = current;
-                
-                if (progress < 1) {
-                    requestAnimationFrame(animateCounter);
-                } else {
-                    counter.textContent = target;
-                    // Efecto de completado
-                    counter.style.transform = 'scale(1.1)';
-                    setTimeout(() => {
-                        counter.style.transform = 'scale(1)';
-                    }, 200);
-                }
+        function animate(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Easing functions
+            let easedProgress = progress;
+            if (easing === 'easeOut') {
+                easedProgress = 1 - Math.pow(1 - progress, 3);
+            } else if (easing === 'easeInOut') {
+                easedProgress = progress < 0.5 
+                    ? 2 * progress * progress 
+                    : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+            } else if (easing === 'bounce') {
+                easedProgress = progress < 0.5 
+                    ? 2 * progress * progress 
+                    : 1 - Math.pow(-2 * progress + 2, 2) / 2;
             }
             
-            requestAnimationFrame(animateCounter);
-        }, index * 300);
+            // Interpolate properties
+            Object.keys(endProps).forEach(prop => {
+                const start = startProps[prop];
+                const end = endProps[prop];
+                const current = start + (end - start) * easedProgress;
+                
+                if (prop === 'opacity') {
+                    element.style.opacity = current;
+                } else if (prop === 'translateY') {
+                    element.style.transform = `translateY(${current}px)`;
+                } else if (prop === 'translateX') {
+                    element.style.transform = `translateX(${current}px)`;
+                } else if (prop === 'scale') {
+                    element.style.transform = `scale(${current})`;
+                } else if (prop === 'rotate') {
+                    element.style.transform = `rotate(${current}deg)`;
+                }
+            });
+            
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                resolve();
+            }
+        }
+        
+        requestAnimationFrame(animate);
     });
 }
 
-// Efecto de escritura profesional
+// Animaciones específicas
+function fadeInUp(element, delay = 0) {
+    setTimeout(() => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(30px)';
+        
+        setTimeout(() => {
+            animateElement(element, 
+                { opacity: 0, translateY: 30 }, 
+                { opacity: 1, translateY: 0 }, 
+                800, 'easeOut'
+            );
+        }, 50);
+    }, delay);
+}
+
+function slideInLeft(element, delay = 0) {
+    setTimeout(() => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateX(-50px)';
+        
+        setTimeout(() => {
+            animateElement(element, 
+                { opacity: 0, translateX: -50 }, 
+                { opacity: 1, translateX: 0 }, 
+                800, 'easeOut'
+            );
+        }, 50);
+    }, delay);
+}
+
+function slideInRight(element, delay = 0) {
+    setTimeout(() => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateX(50px)';
+        
+        setTimeout(() => {
+            animateElement(element, 
+                { opacity: 0, translateX: 50 }, 
+                { opacity: 1, translateX: 0 }, 
+                800, 'easeOut'
+            );
+        }, 50);
+    }, delay);
+}
+
+function scaleIn(element, delay = 0) {
+    setTimeout(() => {
+        element.style.opacity = '0';
+        element.style.transform = 'scale(0.8)';
+        
+        setTimeout(() => {
+            animateElement(element, 
+                { opacity: 0, scale: 0.8 }, 
+                { opacity: 1, scale: 1 }, 
+                600, 'bounce'
+            );
+        }, 50);
+    }, delay);
+}
+
+// Inicializar todas las animaciones
+function initAllAnimations() {
+    console.log('🎬 Iniciando animaciones JavaScript...');
+    
+    // Section headers
+    const sectionHeaders = document.querySelectorAll('.section-header');
+    sectionHeaders.forEach((header, index) => {
+        fadeInUp(header, index * 200);
+    });
+    
+    // About card
+    const aboutCard = document.querySelector('.about-card');
+    if (aboutCard) {
+        slideInLeft(aboutCard, 300);
+    }
+    
+    // Stat cards
+    const statCards = document.querySelectorAll('.stat-card');
+    statCards.forEach((card, index) => {
+        scaleIn(card, 500 + (index * 150));
+    });
+    
+    // Skill cards
+    const skillCards = document.querySelectorAll('.skill-card');
+    skillCards.forEach((card, index) => {
+        fadeInUp(card, 800 + (index * 100));
+    });
+    
+    // Project cards
+    const projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach((card, index) => {
+        if (index % 2 === 0) {
+            slideInRight(card, 1000 + (index * 200));
+        } else {
+            slideInLeft(card, 1000 + (index * 200));
+        }
+    });
+    
+    console.log(`✅ Animaciones iniciadas para ${sectionHeaders.length + statCards.length + skillCards.length + projectCards.length} elementos`);
+}
+
+// Efectos hover con JavaScript
+function initHoverEffects() {
+    console.log('🎯 Iniciando efectos hover...');
+    
+    const cards = document.querySelectorAll('.card-hover');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px) scale(1.02)';
+            this.style.boxShadow = '0 10px 25px rgba(0,0,0,0.2)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+            this.style.boxShadow = '';
+        });
+    });
+    
+    console.log(`✅ Efectos hover agregados a ${cards.length} elementos`);
+}
+
+// Contadores animados
+function animateCounters() {
+    console.log('🔢 Animando contadores...');
+    const counters = document.querySelectorAll('.stat-number');
+    
+    counters.forEach((counter, index) => {
+        const target = parseInt(counter.getAttribute('data-target'));
+        let current = 0;
+        const increment = target / 30;
+        
+        setTimeout(() => {
+            const interval = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    counter.textContent = target;
+                    clearInterval(interval);
+                } else {
+                    counter.textContent = Math.floor(current);
+                }
+            }, 50);
+        }, index * 200);
+    });
+}
+
+// Efecto de escritura
 function typeText() {
+    console.log('⌨️ Iniciando efecto de escritura...');
     const heroGreeting = document.querySelector('.hero-greeting');
     if (heroGreeting) {
         const text = heroGreeting.textContent;
         heroGreeting.textContent = '';
-        heroGreeting.style.opacity = '1';
         
         let i = 0;
-        const typeInterval = setInterval(() => {
+        const interval = setInterval(() => {
             heroGreeting.textContent += text.charAt(i);
             i++;
             if (i >= text.length) {
-                clearInterval(typeInterval);
-                // Agregar cursor parpadeante
-                heroGreeting.innerHTML += '<span style="animation: blink 1s infinite;">|</span>';
+                clearInterval(interval);
             }
-        }, 80);
+        }, 100);
     }
-}
-
-// Scroll reveal con Intersection Observer
-function initScrollReveal() {
-    const revealElements = document.querySelectorAll('.scroll-reveal');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('revealed');
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    });
-    
-    revealElements.forEach(el => observer.observe(el));
-}
-
-// Efectos hover avanzados
-function initAdvancedHover() {
-    const cards = document.querySelectorAll('.card-hover');
-    
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-8px) scale(1.02) rotateX(2deg)';
-            this.style.boxShadow = '0 20px 40px rgba(0,0,0,0.15)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1) rotateX(0deg)';
-            this.style.boxShadow = '';
-        });
-    });
 }
 
 // Inicializar todo
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('📄 DOM listo, iniciando animaciones profesionales...');
+    console.log('📄 DOM listo, iniciando sistema JavaScript...');
     
-    // Scroll reveal
-    initScrollReveal();
+    // Inicializar animaciones
+    setTimeout(initAllAnimations, 100);
     
-    // Hover effects
-    initAdvancedHover();
+    // Efectos hover
+    setTimeout(initHoverEffects, 200);
     
     // Efecto de escritura
     setTimeout(typeText, 500);
     
-    // Contadores con delay
-    setTimeout(animateCounters, 1500);
+    // Contadores
+    setTimeout(animateCounters, 1000);
 });
 
-console.log('✅ Sistema de animaciones profesionales cargado');
+console.log('✅ Sistema JavaScript cargado');
 
 // Initialize EmailJS
 (function() {
