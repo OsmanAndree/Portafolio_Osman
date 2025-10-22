@@ -283,78 +283,87 @@ filterBtns.forEach((btn) => {
   });
 });
 
-// VISUAL EFFECTS SYSTEM - NO CSS ANIMATIONS REQUIRED
-console.log('🎨 Starting Visual Effects System...');
+// ADVANCED VISUAL EFFECTS SYSTEM
+console.log('🎨 Starting Advanced Visual Effects System...');
 
-// Function to add visual effects to elements
-function addVisualEffects() {
-  console.log('✨ Adding visual effects...');
+// Advanced animation system with scroll detection
+function initAdvancedAnimations() {
+  console.log('✨ Initializing advanced animations...');
   
-  // Add hover effects to cards
+  // Add scroll reveal animations
+  const revealElements = document.querySelectorAll('.section-header, .about-card, .stat-card, .skill-card, .project-card, .certification-card, .timeline-item');
+  
+  revealElements.forEach((el, index) => {
+    el.classList.add('scroll-reveal');
+    el.style.transitionDelay = `${index * 0.1}s`;
+  });
+  
+  // Scroll detection for reveal animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        console.log(`✅ Revealed: ${entry.target.className}`);
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  });
+  
+  revealElements.forEach(el => observer.observe(el));
+  
+  console.log(`✅ Added scroll reveal to ${revealElements.length} elements`);
+}
+
+// Advanced hover effects
+function initAdvancedHoverEffects() {
+  console.log('🎯 Adding advanced hover effects...');
+  
+  // Cards with advanced hover effects
   const cards = document.querySelectorAll('.about-card, .stat-card, .skill-card, .project-card, .certification-card');
   
   cards.forEach((card, index) => {
-    // Add initial styles
-    card.style.transition = 'all 0.3s ease';
-    card.style.transform = 'translateY(0)';
-    card.style.opacity = '0.8';
+    // Add hover classes
+    card.classList.add('hover-lift');
     
-    // Add hover effect
+    // Add shimmer effect on hover
     card.addEventListener('mouseenter', () => {
-      card.style.transform = 'translateY(-10px)';
-      card.style.boxShadow = '0 20px 40px rgba(0,0,0,0.2)';
-      card.style.opacity = '1';
+      card.classList.add('animate-shimmer');
     });
     
     card.addEventListener('mouseleave', () => {
-      card.style.transform = 'translateY(0)';
-      card.style.boxShadow = '';
-      card.style.opacity = '0.8';
+      card.classList.remove('animate-shimmer');
     });
     
-    // Staggered appearance effect
+    // Staggered appearance
     setTimeout(() => {
       card.style.opacity = '1';
       card.style.transform = 'translateY(0)';
     }, index * 100);
-    
-    console.log(`✅ Added effects to card ${index + 1}`);
   });
   
-  // Add slide-in effect to sections
-  const sections = document.querySelectorAll('section');
-  sections.forEach((section, index) => {
-    section.style.opacity = '0';
-    section.style.transform = 'translateY(50px)';
-    section.style.transition = 'all 0.6s ease';
-    
-    setTimeout(() => {
-      section.style.opacity = '1';
-      section.style.transform = 'translateY(0)';
-    }, index * 200);
-  });
-  
-  // Add button effects
+  // Buttons with glow effect
   const buttons = document.querySelectorAll('.btn, .category-btn, .filter-btn');
   buttons.forEach(button => {
-    button.style.transition = 'all 0.3s ease';
+    button.classList.add('hover-glow');
     
     button.addEventListener('mouseenter', () => {
-      button.style.transform = 'translateY(-2px)';
-      button.style.boxShadow = '0 10px 20px rgba(0,0,0,0.2)';
+      button.style.transform = 'translateY(-3px) scale(1.02)';
+      button.style.boxShadow = '0 15px 30px rgba(0,0,0,0.2)';
     });
     
     button.addEventListener('mouseleave', () => {
-      button.style.transform = 'translateY(0)';
+      button.style.transform = 'translateY(0) scale(1)';
       button.style.boxShadow = '';
     });
   });
   
-  console.log(`✅ Added effects to ${cards.length} cards, ${sections.length} sections, ${buttons.length} buttons`);
+  console.log(`✅ Added advanced effects to ${cards.length} cards and ${buttons.length} buttons`);
 }
 
-// Function to add typing effect to text
-function addTypingEffect() {
+// Advanced typing effect
+function initAdvancedTypingEffect() {
   const heroGreeting = document.querySelector('.hero-greeting');
   if (heroGreeting) {
     const text = heroGreeting.textContent;
@@ -367,49 +376,131 @@ function addTypingEffect() {
       i++;
       if (i >= text.length) {
         clearInterval(typeInterval);
+        // Add cursor blink effect
+        heroGreeting.innerHTML += '<span class="typing-cursor">|</span>';
       }
-    }, 100);
+    }, 80);
   }
 }
 
-// Function to add counter animation
-function animateCounters() {
+// Advanced counter animation with easing
+function initAdvancedCounters() {
   const counters = document.querySelectorAll('.stat-number');
-  counters.forEach(counter => {
+  counters.forEach((counter, index) => {
     const target = parseInt(counter.getAttribute('data-target'));
     let current = 0;
-    const increment = target / 50;
+    const duration = 2000;
+    const increment = target / (duration / 16);
     
-    const counterInterval = setInterval(() => {
-      current += increment;
-      if (current >= target) {
-        counter.textContent = target;
-        clearInterval(counterInterval);
-      } else {
-        counter.textContent = Math.floor(current);
-      }
-    }, 30);
+    // Staggered start
+    setTimeout(() => {
+      const counterInterval = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          counter.textContent = target;
+          clearInterval(counterInterval);
+          // Add completion effect
+          counter.style.transform = 'scale(1.1)';
+          setTimeout(() => {
+            counter.style.transform = 'scale(1)';
+          }, 200);
+        } else {
+          counter.textContent = Math.floor(current);
+        }
+      }, 16);
+    }, index * 200);
   });
+}
+
+// Floating elements with advanced physics
+function initFloatingElements() {
+  const floatingCards = document.querySelectorAll('.floating-card');
+  floatingCards.forEach((card, index) => {
+    card.classList.add('animate-float');
+    card.style.animationDelay = `${index * 0.5}s`;
+  });
+}
+
+// Parallax scrolling effect
+function initParallaxEffect() {
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    
+    // Parallax for hero background
+    const heroBackground = document.querySelector('.hero-background');
+    if (heroBackground) {
+      heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
+    }
+    
+    // Parallax for floating elements
+    const floatingElements = document.querySelectorAll('.floating-card');
+    floatingElements.forEach((element, index) => {
+      const speed = 0.3 + (index * 0.1);
+      element.style.transform = `translateY(${scrolled * speed * 0.1}px)`;
+    });
+  });
+}
+
+// Advanced skill bar animations
+function initAdvancedSkillBars() {
+  const skillBars = document.querySelectorAll('.skill-progress');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const bar = entry.target;
+        const level = bar.dataset.level;
+        
+        // Animate with easing
+        let current = 0;
+        const target = parseInt(level);
+        const duration = 1500;
+        const increment = target / (duration / 16);
+        
+        const animateBar = () => {
+          current += increment;
+          if (current >= target) {
+            bar.style.width = target + '%';
+          } else {
+            bar.style.width = Math.floor(current) + '%';
+            requestAnimationFrame(animateBar);
+          }
+        };
+        
+        animateBar();
+        observer.unobserve(bar);
+      }
+    });
+  }, { threshold: 0.5 });
+  
+  skillBars.forEach(bar => observer.observe(bar));
 }
 
 // Initialize everything
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('📄 DOM ready, initializing visual effects...');
+  console.log('📄 DOM ready, initializing advanced effects...');
   
   setTimeout(() => {
-    addVisualEffects();
-    addTypingEffect();
+    initAdvancedAnimations();
+    initAdvancedHoverEffects();
+    initAdvancedTypingEffect();
+    initFloatingElements();
+    initParallaxEffect();
+    initAdvancedSkillBars();
   }, 500);
   
   setTimeout(() => {
-    animateCounters();
+    initAdvancedCounters();
   }, 2000);
 });
 
 // Also run on window load
 window.addEventListener('load', () => {
-  console.log('🔄 Window loaded, running visual effects...');
-  setTimeout(addVisualEffects, 1000);
+  console.log('🔄 Window loaded, running advanced effects...');
+  setTimeout(() => {
+    initAdvancedAnimations();
+    initAdvancedHoverEffects();
+  }, 1000);
 });
 
 // Initialize EmailJS
