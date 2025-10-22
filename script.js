@@ -11,6 +11,7 @@ const backToTop = document.getElementById("back-to-top");
 const cursor = document.querySelector(".cursor");
 const cursorFollower = document.querySelector(".cursor-follower");
 const contactForm = document.getElementById("contact-form");
+// Eliminada la referencia a elementos animados
 
 // Theme Management
 let currentTheme = localStorage.getItem("theme") || "light";
@@ -60,7 +61,7 @@ function updateLoadingProgress() {
 }
 
 // Start loading animation
-window.addEventListener("load", () => {
+window.addEventListener("DOMContentLoaded", () => {
   setTimeout(updateLoadingProgress, 500);
 });
 
@@ -193,6 +194,8 @@ window.addEventListener("load", () => {
   }, 2000);
 });
 
+// Función eliminada ya que no se utiliza
+
 // Animated counters for stats
 function animateCounter(element, target, duration = 2000) {
   let start = 0;
@@ -287,27 +290,9 @@ filterBtns.forEach((btn) => {
 console.log('🎯 Starting Ultra Simple Animation System...');
 
 // IMMEDIATE TEST - This should work right away
-function testImmediateAnimation() {
-    console.log('🧪 Testing immediate animation...');
-    const testElement = document.getElementById('test-element');
-    if (testElement) {
-        // Make it bounce immediately
-        let direction = 1;
-        setInterval(() => {
-            const currentTop = parseInt(testElement.style.top) || 10;
-            const newTop = currentTop + (direction * 5);
-            testElement.style.top = newTop + 'px';
-            
-            if (newTop > 50) direction = -1;
-            if (newTop < 10) direction = 1;
-        }, 100);
-        
-        console.log('✅ Test element is bouncing!');
-    }
-}
+// Función de prueba eliminada
 
-// Run test immediately
-testImmediateAnimation();
+// Código de prueba eliminado
 
 // Simple hover effects that ALWAYS work
 function addSimpleHoverEffects() {
