@@ -283,301 +283,155 @@ filterBtns.forEach((btn) => {
   });
 });
 
-// PURE JAVASCRIPT ANIMATION SYSTEM - NO CSS DEPENDENCIES
-console.log('🚀 Starting Pure JavaScript Animation System...');
+// ULTRA SIMPLE ANIMATION SYSTEM - GUARANTEED TO WORK
+console.log('🎯 Starting Ultra Simple Animation System...');
 
-// Pure JavaScript animations using requestAnimationFrame
-function animateElement(element, startProps, endProps, duration, easing = 'easeOut') {
-    return new Promise((resolve) => {
-        const startTime = performance.now();
-        
-        function animate(currentTime) {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
+// IMMEDIATE TEST - This should work right away
+function testImmediateAnimation() {
+    console.log('🧪 Testing immediate animation...');
+    const testElement = document.getElementById('test-element');
+    if (testElement) {
+        // Make it bounce immediately
+        let direction = 1;
+        setInterval(() => {
+            const currentTop = parseInt(testElement.style.top) || 10;
+            const newTop = currentTop + (direction * 5);
+            testElement.style.top = newTop + 'px';
             
-            // Apply easing
-            let easedProgress = progress;
-            if (easing === 'easeOut') {
-                easedProgress = 1 - Math.pow(1 - progress, 3);
-            } else if (easing === 'easeInOut') {
-                easedProgress = progress < 0.5 
-                    ? 2 * progress * progress 
-                    : 1 - Math.pow(-2 * progress + 2, 3) / 2;
-            }
-            
-            // Interpolate properties
-            Object.keys(endProps).forEach(prop => {
-                const start = startProps[prop];
-                const end = endProps[prop];
-                const current = start + (end - start) * easedProgress;
-                
-                if (prop === 'opacity') {
-                    element.style.opacity = current;
-                } else if (prop === 'translateX') {
-                    element.style.transform = `translateX(${current}px)`;
-                } else if (prop === 'translateY') {
-                    element.style.transform = `translateY(${current}px)`;
-                } else if (prop === 'scale') {
-                    element.style.transform = `scale(${current})`;
-                } else if (prop === 'rotate') {
-                    element.style.transform = `rotate(${current}deg)`;
-                }
-            });
-            
-            if (progress < 1) {
-                requestAnimationFrame(animate);
-            } else {
-                resolve();
-            }
-        }
+            if (newTop > 50) direction = -1;
+            if (newTop < 10) direction = 1;
+        }, 100);
         
-        requestAnimationFrame(animate);
-    });
-}
-
-// Slide in from left animation
-function slideInLeft(element, delay = 0) {
-    setTimeout(() => {
-        element.style.opacity = '0';
-        element.style.transform = 'translateX(-100px)';
-        element.style.transition = 'none';
-        
-        setTimeout(() => {
-            animateElement(element, 
-                { opacity: 0, translateX: -100 }, 
-                { opacity: 1, translateX: 0 }, 
-                800, 'easeOut'
-            );
-        }, 50);
-    }, delay);
-}
-
-// Slide in from right animation
-function slideInRight(element, delay = 0) {
-    setTimeout(() => {
-        element.style.opacity = '0';
-        element.style.transform = 'translateX(100px)';
-        element.style.transition = 'none';
-        
-        setTimeout(() => {
-            animateElement(element, 
-                { opacity: 0, translateX: 100 }, 
-                { opacity: 1, translateX: 0 }, 
-                800, 'easeOut'
-            );
-        }, 50);
-    }, delay);
-}
-
-// Fade in up animation
-function fadeInUp(element, delay = 0) {
-    setTimeout(() => {
-        element.style.opacity = '0';
-        element.style.transform = 'translateY(50px)';
-        element.style.transition = 'none';
-        
-        setTimeout(() => {
-            animateElement(element, 
-                { opacity: 0, translateY: 50 }, 
-                { opacity: 1, translateY: 0 }, 
-                800, 'easeOut'
-            );
-        }, 50);
-    }, delay);
-}
-
-// Scale in animation
-function scaleIn(element, delay = 0) {
-    setTimeout(() => {
-        element.style.opacity = '0';
-        element.style.transform = 'scale(0.5)';
-        element.style.transition = 'none';
-        
-        setTimeout(() => {
-            animateElement(element, 
-                { opacity: 0, scale: 0.5 }, 
-                { opacity: 1, scale: 1 }, 
-                600, 'easeOut'
-            );
-        }, 50);
-    }, delay);
-}
-
-// Bounce in animation
-function bounceIn(element, delay = 0) {
-    setTimeout(() => {
-        element.style.opacity = '0';
-        element.style.transform = 'scale(0.3)';
-        element.style.transition = 'none';
-        
-        setTimeout(() => {
-            animateElement(element, 
-                { opacity: 0, scale: 0.3 }, 
-                { opacity: 1, scale: 1.1 }, 
-                400, 'easeOut'
-            ).then(() => {
-                animateElement(element, 
-                    { scale: 1.1 }, 
-                    { scale: 1 }, 
-                    200, 'easeOut'
-                );
-            });
-        }, 50);
-    }, delay);
-}
-
-// Initialize all animations
-function initPureJSAnimations() {
-    console.log('🎬 Initializing pure JavaScript animations...');
-    
-    // Section headers - fade in up
-    const sectionHeaders = document.querySelectorAll('.section-header');
-    sectionHeaders.forEach((header, index) => {
-        fadeInUp(header, index * 200);
-    });
-    
-    // About card - slide in left
-    const aboutCard = document.querySelector('.about-card');
-    if (aboutCard) {
-        slideInLeft(aboutCard, 300);
+        console.log('✅ Test element is bouncing!');
     }
-    
-    // Stat cards - scale in with stagger
-    const statCards = document.querySelectorAll('.stat-card');
-    statCards.forEach((card, index) => {
-        scaleIn(card, 500 + (index * 150));
-    });
-    
-    // Skill cards - slide in up with stagger
-    const skillCards = document.querySelectorAll('.skill-card');
-    skillCards.forEach((card, index) => {
-        fadeInUp(card, 800 + (index * 100));
-    });
-    
-    // Project cards - slide in right with stagger
-    const projectCards = document.querySelectorAll('.project-card');
-    projectCards.forEach((card, index) => {
-        slideInRight(card, 1000 + (index * 200));
-    });
-    
-    console.log(`✅ Initialized animations for ${sectionHeaders.length + statCards.length + skillCards.length + projectCards.length} elements`);
 }
 
-// Enhanced hover effects with pure JavaScript
-function initPureJSHoverEffects() {
-    console.log('🎯 Adding pure JavaScript hover effects...');
+// Run test immediately
+testImmediateAnimation();
+
+// Simple hover effects that ALWAYS work
+function addSimpleHoverEffects() {
+    console.log('🎨 Adding simple hover effects...');
     
+    // Cards hover effect
     const cards = document.querySelectorAll('.about-card, .stat-card, .skill-card, .project-card, .certification-card');
-    
     cards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            card.style.transform = 'translateY(-8px) scale(1.03)';
-            card.style.boxShadow = '0 20px 40px rgba(0,0,0,0.25)';
-            card.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        card.style.transition = 'all 0.3s ease';
+        
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+            this.style.boxShadow = '0 10px 20px rgba(0,0,0,0.2)';
         });
         
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'translateY(0) scale(1)';
-            card.style.boxShadow = '';
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = '';
         });
     });
     
-    // Button hover effects
+    // Buttons hover effect
     const buttons = document.querySelectorAll('.btn, .category-btn, .filter-btn');
     buttons.forEach(button => {
-        button.addEventListener('mouseenter', () => {
-            button.style.transform = 'translateY(-3px) scale(1.05)';
-            button.style.boxShadow = '0 10px 25px rgba(0,0,0,0.2)';
-            button.style.transition = 'all 0.3s ease';
+        button.style.transition = 'all 0.3s ease';
+        
+        button.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.05)';
+            this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
         });
         
-        button.addEventListener('mouseleave', () => {
-            button.style.transform = 'translateY(0) scale(1)';
-            button.style.boxShadow = '';
+        button.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+            this.style.boxShadow = '';
         });
     });
     
     console.log(`✅ Added hover effects to ${cards.length} cards and ${buttons.length} buttons`);
 }
 
-// Pure JavaScript counter animation
-function initPureJSCounters() {
+// Simple counter animation
+function animateCounters() {
+    console.log('🔢 Animating counters...');
     const counters = document.querySelectorAll('.stat-number');
+    
     counters.forEach((counter, index) => {
         const target = parseInt(counter.getAttribute('data-target'));
         let current = 0;
-        const duration = 2000;
-        const startTime = performance.now();
+        const increment = target / 30;
         
         setTimeout(() => {
-            function animateCounter(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                const easedProgress = 1 - Math.pow(1 - progress, 3);
-                
-                current = Math.floor(target * easedProgress);
-                counter.textContent = current;
-                
-                if (progress < 1) {
-                    requestAnimationFrame(animateCounter);
-                } else {
+            const interval = setInterval(() => {
+                current += increment;
+                if (current >= target) {
                     counter.textContent = target;
-                    // Add completion effect
-                    counter.style.transform = 'scale(1.2)';
-                    setTimeout(() => {
-                        counter.style.transform = 'scale(1)';
-                    }, 200);
+                    clearInterval(interval);
+                } else {
+                    counter.textContent = Math.floor(current);
                 }
-            }
-            
-            requestAnimationFrame(animateCounter);
-        }, index * 300);
+            }, 50);
+        }, index * 200);
     });
 }
 
-// Pure JavaScript typing effect
-function initPureJSTyping() {
+// Simple typing effect
+function typeText() {
+    console.log('⌨️ Starting typing effect...');
     const heroGreeting = document.querySelector('.hero-greeting');
     if (heroGreeting) {
         const text = heroGreeting.textContent;
         heroGreeting.textContent = '';
-        heroGreeting.style.opacity = '1';
         
         let i = 0;
-        const typeInterval = setInterval(() => {
+        const interval = setInterval(() => {
             heroGreeting.textContent += text.charAt(i);
             i++;
             if (i >= text.length) {
-                clearInterval(typeInterval);
-                // Add blinking cursor
-                heroGreeting.innerHTML += '<span style="animation: blink 1s infinite;">|</span>';
+                clearInterval(interval);
             }
-        }, 80);
+        }, 100);
     }
 }
 
+// Simple fade in effect
+function fadeInElements() {
+    console.log('✨ Adding fade in effects...');
+    
+    const elements = document.querySelectorAll('.section-header, .about-card, .stat-card, .skill-card, .project-card');
+    
+    elements.forEach((element, index) => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(20px)';
+        element.style.transition = 'all 0.6s ease';
+        
+        setTimeout(() => {
+            element.style.opacity = '1';
+            element.style.transform = 'translateY(0)';
+        }, index * 100);
+    });
+    
+    console.log(`✅ Added fade in to ${elements.length} elements`);
+}
+
 // Initialize everything
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('📄 DOM ready, initializing pure JS animations...');
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('📄 DOM ready, starting simple animations...');
     
-    setTimeout(() => {
-        initPureJSAnimations();
-        initPureJSHoverEffects();
-        initPureJSTyping();
-    }, 500);
+    // Add hover effects immediately
+    addSimpleHoverEffects();
     
-    setTimeout(() => {
-        initPureJSCounters();
-    }, 1500);
+    // Add fade in effects
+    setTimeout(fadeInElements, 100);
+    
+    // Add typing effect
+    setTimeout(typeText, 500);
+    
+    // Add counter animations
+    setTimeout(animateCounters, 1000);
 });
 
 // Also run on window load
-window.addEventListener('load', () => {
-    console.log('🔄 Window loaded, running pure JS animations...');
-    setTimeout(() => {
-        initPureJSAnimations();
-        initPureJSHoverEffects();
-    }, 1000);
+window.addEventListener('load', function() {
+    console.log('🔄 Window loaded, running simple animations...');
+    setTimeout(addSimpleHoverEffects, 100);
 });
 
 // Initialize EmailJS
