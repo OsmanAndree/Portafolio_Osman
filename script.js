@@ -283,55 +283,49 @@ filterBtns.forEach((btn) => {
   });
 });
 
-// Simple and reliable animation system
+// Simplified and Reliable Animation System
 function initAnimations() {
-  // Add initial animation classes to all elements
-  const elementsToAnimate = document.querySelectorAll(
-    '.section-header, .about-card, .stat-card, .timeline-item, .skill-card, .project-card, .certification-card, .highlight-item, .contact-method, .contact-card, .contact-form'
-  );
+  console.log('🎬 Initializing animations...');
+  
+  // Elements to animate
+  const elementsToAnimate = {
+    '.section-header': 'animate-fade-in',
+    '.about-card': 'animate-slide-up animate-delay-1',
+    '.stat-card': 'animate-bounce animate-delay-2',
+    '.timeline-item': 'animate-slide-left animate-delay-1',
+    '.skill-card': 'animate-scale animate-delay-2',
+    '.project-card': 'animate-slide-up animate-delay-1',
+    '.certification-card': 'animate-bounce animate-delay-2',
+    '.highlight-item': 'animate-fade-in animate-delay-1',
+    '.contact-method': 'animate-slide-right animate-delay-1',
+    '.contact-card': 'animate-slide-left animate-delay-2',
+    '.contact-form': 'animate-slide-right animate-delay-3'
+  };
 
-  console.log(`Found ${elementsToAnimate.length} elements to animate`);
-
-  elementsToAnimate.forEach((el, index) => {
-    // Add animation class based on element type
-    if (el.classList.contains('section-header')) {
-      el.classList.add('animate-fade-in');
-    } else if (el.classList.contains('timeline-item')) {
-      el.classList.add(index % 2 === 0 ? 'animate-slide-left' : 'animate-slide-right');
-    } else if (el.classList.contains('stat-card') || el.classList.contains('certification-card')) {
-      el.classList.add('animate-bounce');
-    } else if (el.classList.contains('project-card')) {
-      el.classList.add('animate-slide-up');
-    } else if (el.classList.contains('skill-card')) {
-      el.classList.add('animate-scale');
-    } else {
-      el.classList.add('animate-fade-in');
-    }
+  // Apply animation classes
+  Object.entries(elementsToAnimate).forEach(([selector, animationClass]) => {
+    const elements = document.querySelectorAll(selector);
+    elements.forEach((el, index) => {
+      // Add staggered delay based on index
+      const delayClass = `animate-delay-${(index % 5) + 1}`;
+      el.classList.add(animationClass.split(' ')[0], delayClass);
+    });
   });
 
-  // Simple scroll-based animation trigger
-  function checkAnimations() {
-    elementsToAnimate.forEach((el) => {
-      const rect = el.getBoundingClientRect();
-      const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-      
-      if (isVisible && !el.classList.contains('animated')) {
-        el.classList.add('animated');
-        console.log(`Animating element: ${el.className}`);
-      }
-    });
-  }
-
-  // Check on scroll and initial load
-  window.addEventListener('scroll', checkAnimations);
-  window.addEventListener('load', checkAnimations);
-  
-  // Initial check
-  setTimeout(checkAnimations, 100);
+  console.log('✅ Animation classes applied successfully');
 }
 
 // Initialize animations when DOM is ready
-document.addEventListener('DOMContentLoaded', initAnimations);
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('🚀 DOM loaded, initializing animations...');
+  initAnimations();
+  
+  // Also initialize on window load as backup
+  window.addEventListener('load', () => {
+    console.log('🔄 Window loaded, re-initializing animations...');
+    setTimeout(initAnimations, 100);
+  });
+});
 
 // Initialize EmailJS
 (function() {
@@ -618,23 +612,29 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initialize skill bars animation for default category
   setTimeout(() => {
     const defaultSkills = document.querySelectorAll('.skill-card[data-category="languages"]');
-    defaultSkills.forEach((card) => {
+    defaultSkills.forEach((card, index) => {
       const progressBar = card.querySelector(".skill-progress");
       if (progressBar) {
         const level = progressBar.dataset.level;
-        progressBar.style.width = level + "%";
+        // Stagger the animation
+        setTimeout(() => {
+          progressBar.style.width = level + "%";
+        }, index * 200);
       }
     });
-  }, 1000);
+  }, 1500);
 
   // Animate counters when stats section becomes visible
   function animateCounters() {
     const statsGrid = document.querySelector('.stats-grid');
-    if (statsGrid && statsGrid.classList.contains('animated')) {
+    if (statsGrid) {
       const counters = statsGrid.querySelectorAll(".stat-number");
-      counters.forEach((counter) => {
+      counters.forEach((counter, index) => {
         const target = Number.parseInt(counter.getAttribute("data-target"));
-        animateCounter(counter, target);
+        // Stagger the counter animations
+        setTimeout(() => {
+          animateCounter(counter, target);
+        }, index * 300);
       });
     }
   }
@@ -642,16 +642,16 @@ document.addEventListener("DOMContentLoaded", () => {
   // Animate skill bars when skills section becomes visible
   function animateSkillBars() {
     const skillsGrid = document.querySelector('.skills-grid');
-    if (skillsGrid && skillsGrid.classList.contains('animated')) {
+    if (skillsGrid) {
       const activeCategory = document.querySelector(".category-btn.active")?.dataset.category || "languages";
       const visibleCards = document.querySelectorAll(`.skill-card[data-category="${activeCategory}"]`);
-      visibleCards.forEach((card) => {
+      visibleCards.forEach((card, index) => {
         const progressBar = card.querySelector(".skill-progress");
         if (progressBar) {
           const level = progressBar.dataset.level;
           setTimeout(() => {
             progressBar.style.width = level + "%";
-          }, 200);
+          }, index * 150);
         }
       });
     }
@@ -665,7 +665,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Listen for scroll to trigger special animations
   window.addEventListener('scroll', checkSpecialAnimations);
-  setTimeout(checkSpecialAnimations, 1500);
+  setTimeout(checkSpecialAnimations, 2000);
 
   // Add hover effects to interactive elements
   const interactiveElements = document.querySelectorAll('.btn, .social-link, .project-link, .nav-link, .category-btn, .filter-btn');
@@ -710,5 +710,23 @@ function initHoverEffects() {
   });
 }
 
-// Initialize hover effects
-initHoverEffects();
+// Backup animation initialization
+function ensureAnimationsWork() {
+  console.log('🔄 Ensuring animations work...');
+  
+  // Force trigger animations for visible elements
+  const animatedElements = document.querySelectorAll('.animate-fade-in, .animate-slide-up, .animate-slide-left, .animate-slide-right, .animate-scale, .animate-bounce');
+  
+  animatedElements.forEach((el, index) => {
+    // Force reflow to ensure animations trigger
+    el.style.animationPlayState = 'paused';
+    setTimeout(() => {
+      el.style.animationPlayState = 'running';
+    }, index * 50);
+  });
+  
+  console.log(`✅ Ensured ${animatedElements.length} animations are working`);
+}
+
+// Run backup after a delay
+setTimeout(ensureAnimationsWork, 3000);
