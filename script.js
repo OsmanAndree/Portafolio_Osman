@@ -283,53 +283,134 @@ filterBtns.forEach((btn) => {
   });
 });
 
-// Ultra Simple Animation System - Guaranteed to Work
-console.log('🚀 Starting ultra simple animation system...');
+// VISUAL EFFECTS SYSTEM - NO CSS ANIMATIONS REQUIRED
+console.log('🎨 Starting Visual Effects System...');
 
-// Force all animations to work
-function forceAnimations() {
-  console.log('🔄 Forcing animations to work...');
+// Function to add visual effects to elements
+function addVisualEffects() {
+  console.log('✨ Adding visual effects...');
   
-  // Get all elements with animation classes
-  const animatedElements = document.querySelectorAll('.animate-fade-in, .animate-slide-up, .animate-slide-left, .animate-slide-right, .animate-scale, .animate-bounce');
+  // Add hover effects to cards
+  const cards = document.querySelectorAll('.about-card, .stat-card, .skill-card, .project-card, .certification-card');
   
-  console.log(`Found ${animatedElements.length} elements to animate`);
-  
-  // Force each animation to start
-  animatedElements.forEach((el, index) => {
-    // Reset animation
-    el.style.animation = 'none';
-    el.offsetHeight; // Trigger reflow
+  cards.forEach((card, index) => {
+    // Add initial styles
+    card.style.transition = 'all 0.3s ease';
+    card.style.transform = 'translateY(0)';
+    card.style.opacity = '0.8';
     
-    // Restart animation with delay
+    // Add hover effect
+    card.addEventListener('mouseenter', () => {
+      card.style.transform = 'translateY(-10px)';
+      card.style.boxShadow = '0 20px 40px rgba(0,0,0,0.2)';
+      card.style.opacity = '1';
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'translateY(0)';
+      card.style.boxShadow = '';
+      card.style.opacity = '0.8';
+    });
+    
+    // Staggered appearance effect
     setTimeout(() => {
-      const animationClass = Array.from(el.classList).find(cls => cls.startsWith('animate-'));
-      const delayClass = Array.from(el.classList).find(cls => cls.startsWith('animate-delay-'));
-      
-      if (animationClass) {
-        el.style.animation = '';
-        el.classList.add('force-animate');
-        console.log(`✅ Animating ${animationClass} on element ${index + 1}`);
-      }
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
     }, index * 100);
+    
+    console.log(`✅ Added effects to card ${index + 1}`);
+  });
+  
+  // Add slide-in effect to sections
+  const sections = document.querySelectorAll('section');
+  sections.forEach((section, index) => {
+    section.style.opacity = '0';
+    section.style.transform = 'translateY(50px)';
+    section.style.transition = 'all 0.6s ease';
+    
+    setTimeout(() => {
+      section.style.opacity = '1';
+      section.style.transform = 'translateY(0)';
+    }, index * 200);
+  });
+  
+  // Add button effects
+  const buttons = document.querySelectorAll('.btn, .category-btn, .filter-btn');
+  buttons.forEach(button => {
+    button.style.transition = 'all 0.3s ease';
+    
+    button.addEventListener('mouseenter', () => {
+      button.style.transform = 'translateY(-2px)';
+      button.style.boxShadow = '0 10px 20px rgba(0,0,0,0.2)';
+    });
+    
+    button.addEventListener('mouseleave', () => {
+      button.style.transform = 'translateY(0)';
+      button.style.boxShadow = '';
+    });
+  });
+  
+  console.log(`✅ Added effects to ${cards.length} cards, ${sections.length} sections, ${buttons.length} buttons`);
+}
+
+// Function to add typing effect to text
+function addTypingEffect() {
+  const heroGreeting = document.querySelector('.hero-greeting');
+  if (heroGreeting) {
+    const text = heroGreeting.textContent;
+    heroGreeting.textContent = '';
+    heroGreeting.style.opacity = '1';
+    
+    let i = 0;
+    const typeInterval = setInterval(() => {
+      heroGreeting.textContent += text.charAt(i);
+      i++;
+      if (i >= text.length) {
+        clearInterval(typeInterval);
+      }
+    }, 100);
+  }
+}
+
+// Function to add counter animation
+function animateCounters() {
+  const counters = document.querySelectorAll('.stat-number');
+  counters.forEach(counter => {
+    const target = parseInt(counter.getAttribute('data-target'));
+    let current = 0;
+    const increment = target / 50;
+    
+    const counterInterval = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        counter.textContent = target;
+        clearInterval(counterInterval);
+      } else {
+        counter.textContent = Math.floor(current);
+      }
+    }, 30);
   });
 }
 
-// Initialize when DOM is ready
+// Initialize everything
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('📄 DOM ready, starting animations...');
-  setTimeout(forceAnimations, 500);
+  console.log('📄 DOM ready, initializing visual effects...');
+  
+  setTimeout(() => {
+    addVisualEffects();
+    addTypingEffect();
+  }, 500);
+  
+  setTimeout(() => {
+    animateCounters();
+  }, 2000);
 });
 
-// Also run on window load as backup
+// Also run on window load
 window.addEventListener('load', () => {
-  console.log('🔄 Window loaded, running backup animations...');
-  setTimeout(forceAnimations, 1000);
+  console.log('🔄 Window loaded, running visual effects...');
+  setTimeout(addVisualEffects, 1000);
 });
-
-// Run animations multiple times to ensure they work
-setTimeout(forceAnimations, 2000);
-setTimeout(forceAnimations, 4000);
 
 // Initialize EmailJS
 (function() {
