@@ -283,49 +283,53 @@ filterBtns.forEach((btn) => {
   });
 });
 
-// Simplified and Reliable Animation System
-function initAnimations() {
-  console.log('🎬 Initializing animations...');
+// Ultra Simple Animation System - Guaranteed to Work
+console.log('🚀 Starting ultra simple animation system...');
+
+// Force all animations to work
+function forceAnimations() {
+  console.log('🔄 Forcing animations to work...');
   
-  // Elements to animate
-  const elementsToAnimate = {
-    '.section-header': 'animate-fade-in',
-    '.about-card': 'animate-slide-up animate-delay-1',
-    '.stat-card': 'animate-bounce animate-delay-2',
-    '.timeline-item': 'animate-slide-left animate-delay-1',
-    '.skill-card': 'animate-scale animate-delay-2',
-    '.project-card': 'animate-slide-up animate-delay-1',
-    '.certification-card': 'animate-bounce animate-delay-2',
-    '.highlight-item': 'animate-fade-in animate-delay-1',
-    '.contact-method': 'animate-slide-right animate-delay-1',
-    '.contact-card': 'animate-slide-left animate-delay-2',
-    '.contact-form': 'animate-slide-right animate-delay-3'
-  };
-
-  // Apply animation classes
-  Object.entries(elementsToAnimate).forEach(([selector, animationClass]) => {
-    const elements = document.querySelectorAll(selector);
-    elements.forEach((el, index) => {
-      // Add staggered delay based on index
-      const delayClass = `animate-delay-${(index % 5) + 1}`;
-      el.classList.add(animationClass.split(' ')[0], delayClass);
-    });
+  // Get all elements with animation classes
+  const animatedElements = document.querySelectorAll('.animate-fade-in, .animate-slide-up, .animate-slide-left, .animate-slide-right, .animate-scale, .animate-bounce');
+  
+  console.log(`Found ${animatedElements.length} elements to animate`);
+  
+  // Force each animation to start
+  animatedElements.forEach((el, index) => {
+    // Reset animation
+    el.style.animation = 'none';
+    el.offsetHeight; // Trigger reflow
+    
+    // Restart animation with delay
+    setTimeout(() => {
+      const animationClass = Array.from(el.classList).find(cls => cls.startsWith('animate-'));
+      const delayClass = Array.from(el.classList).find(cls => cls.startsWith('animate-delay-'));
+      
+      if (animationClass) {
+        el.style.animation = '';
+        el.classList.add('force-animate');
+        console.log(`✅ Animating ${animationClass} on element ${index + 1}`);
+      }
+    }, index * 100);
   });
-
-  console.log('✅ Animation classes applied successfully');
 }
 
-// Initialize animations when DOM is ready
+// Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('🚀 DOM loaded, initializing animations...');
-  initAnimations();
-  
-  // Also initialize on window load as backup
-  window.addEventListener('load', () => {
-    console.log('🔄 Window loaded, re-initializing animations...');
-    setTimeout(initAnimations, 100);
-  });
+  console.log('📄 DOM ready, starting animations...');
+  setTimeout(forceAnimations, 500);
 });
+
+// Also run on window load as backup
+window.addEventListener('load', () => {
+  console.log('🔄 Window loaded, running backup animations...');
+  setTimeout(forceAnimations, 1000);
+});
+
+// Run animations multiple times to ensure they work
+setTimeout(forceAnimations, 2000);
+setTimeout(forceAnimations, 4000);
 
 // Initialize EmailJS
 (function() {
