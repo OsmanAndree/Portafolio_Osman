@@ -283,225 +283,120 @@ filterBtns.forEach((btn) => {
   });
 });
 
-// ADVANCED VISUAL EFFECTS SYSTEM
-console.log('🎨 Starting Advanced Visual Effects System...');
+// SIMPLE BUT EFFECTIVE ANIMATION SYSTEM
+console.log('🎬 Starting Simple Animation System...');
 
-// Advanced animation system with scroll detection
-function initAdvancedAnimations() {
-  console.log('✨ Initializing advanced animations...');
-  
-  // Add scroll reveal animations
-  const revealElements = document.querySelectorAll('.section-header, .about-card, .stat-card, .skill-card, .project-card, .certification-card, .timeline-item');
-  
-  revealElements.forEach((el, index) => {
-    el.classList.add('scroll-reveal');
-    el.style.transitionDelay = `${index * 0.1}s`;
-  });
-  
-  // Scroll detection for reveal animations
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('revealed');
-        console.log(`✅ Revealed: ${entry.target.className}`);
-      }
-    });
-  }, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  });
-  
-  revealElements.forEach(el => observer.observe(el));
-  
-  console.log(`✅ Added scroll reveal to ${revealElements.length} elements`);
-}
-
-// Advanced hover effects
-function initAdvancedHoverEffects() {
-  console.log('🎯 Adding advanced hover effects...');
-  
-  // Cards with advanced hover effects
-  const cards = document.querySelectorAll('.about-card, .stat-card, .skill-card, .project-card, .certification-card');
-  
-  cards.forEach((card, index) => {
-    // Add hover classes
-    card.classList.add('hover-lift');
+// Force animations to work immediately
+function forceAnimations() {
+    console.log('🚀 Forcing animations to work...');
     
-    // Add shimmer effect on hover
-    card.addEventListener('mouseenter', () => {
-      card.classList.add('animate-shimmer');
-    });
+    // Get all elements with animation classes
+    const animatedElements = document.querySelectorAll('[class*="animate-"]');
+    console.log(`Found ${animatedElements.length} elements with animation classes`);
     
-    card.addEventListener('mouseleave', () => {
-      card.classList.remove('animate-shimmer');
-    });
-    
-    // Staggered appearance
-    setTimeout(() => {
-      card.style.opacity = '1';
-      card.style.transform = 'translateY(0)';
-    }, index * 100);
-  });
-  
-  // Buttons with glow effect
-  const buttons = document.querySelectorAll('.btn, .category-btn, .filter-btn');
-  buttons.forEach(button => {
-    button.classList.add('hover-glow');
-    
-    button.addEventListener('mouseenter', () => {
-      button.style.transform = 'translateY(-3px) scale(1.02)';
-      button.style.boxShadow = '0 15px 30px rgba(0,0,0,0.2)';
-    });
-    
-    button.addEventListener('mouseleave', () => {
-      button.style.transform = 'translateY(0) scale(1)';
-      button.style.boxShadow = '';
-    });
-  });
-  
-  console.log(`✅ Added advanced effects to ${cards.length} cards and ${buttons.length} buttons`);
-}
-
-// Advanced typing effect
-function initAdvancedTypingEffect() {
-  const heroGreeting = document.querySelector('.hero-greeting');
-  if (heroGreeting) {
-    const text = heroGreeting.textContent;
-    heroGreeting.textContent = '';
-    heroGreeting.style.opacity = '1';
-    
-    let i = 0;
-    const typeInterval = setInterval(() => {
-      heroGreeting.textContent += text.charAt(i);
-      i++;
-      if (i >= text.length) {
-        clearInterval(typeInterval);
-        // Add cursor blink effect
-        heroGreeting.innerHTML += '<span class="typing-cursor">|</span>';
-      }
-    }, 80);
-  }
-}
-
-// Advanced counter animation with easing
-function initAdvancedCounters() {
-  const counters = document.querySelectorAll('.stat-number');
-  counters.forEach((counter, index) => {
-    const target = parseInt(counter.getAttribute('data-target'));
-    let current = 0;
-    const duration = 2000;
-    const increment = target / (duration / 16);
-    
-    // Staggered start
-    setTimeout(() => {
-      const counterInterval = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-          counter.textContent = target;
-          clearInterval(counterInterval);
-          // Add completion effect
-          counter.style.transform = 'scale(1.1)';
-          setTimeout(() => {
-            counter.style.transform = 'scale(1)';
-          }, 200);
-        } else {
-          counter.textContent = Math.floor(current);
-        }
-      }, 16);
-    }, index * 200);
-  });
-}
-
-// Floating elements with advanced physics
-function initFloatingElements() {
-  const floatingCards = document.querySelectorAll('.floating-card');
-  floatingCards.forEach((card, index) => {
-    card.classList.add('animate-float');
-    card.style.animationDelay = `${index * 0.5}s`;
-  });
-}
-
-// Parallax scrolling effect
-function initParallaxEffect() {
-  window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    
-    // Parallax for hero background
-    const heroBackground = document.querySelector('.hero-background');
-    if (heroBackground) {
-      heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
-    }
-    
-    // Parallax for floating elements
-    const floatingElements = document.querySelectorAll('.floating-card');
-    floatingElements.forEach((element, index) => {
-      const speed = 0.3 + (index * 0.1);
-      element.style.transform = `translateY(${scrolled * speed * 0.1}px)`;
-    });
-  });
-}
-
-// Advanced skill bar animations
-function initAdvancedSkillBars() {
-  const skillBars = document.querySelectorAll('.skill-progress');
-  
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const bar = entry.target;
-        const level = bar.dataset.level;
+    // Force animation restart
+    animatedElements.forEach((element, index) => {
+        // Remove and re-add animation classes to force restart
+        const classes = element.className;
+        element.className = classes.replace(/animate-\w+/g, '');
         
-        // Animate with easing
+        setTimeout(() => {
+            element.className = classes;
+            console.log(`✅ Restarted animation for element ${index + 1}`);
+        }, index * 50);
+    });
+    
+    // Add hover effects to all cards
+    const cards = document.querySelectorAll('.about-card, .stat-card, .skill-card, .project-card, .certification-card');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-5px) scale(1.02)';
+            card.style.boxShadow = '0 15px 35px rgba(0,0,0,0.2)';
+            card.style.transition = 'all 0.3s ease';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0) scale(1)';
+            card.style.boxShadow = '';
+        });
+    });
+    
+    console.log(`✅ Added hover effects to ${cards.length} cards`);
+}
+
+// Simple counter animation
+function animateCounters() {
+    const counters = document.querySelectorAll('.stat-number');
+    counters.forEach((counter, index) => {
+        const target = parseInt(counter.getAttribute('data-target'));
         let current = 0;
-        const target = parseInt(level);
-        const duration = 1500;
-        const increment = target / (duration / 16);
+        const increment = target / 50;
         
-        const animateBar = () => {
-          current += increment;
-          if (current >= target) {
-            bar.style.width = target + '%';
-          } else {
-            bar.style.width = Math.floor(current) + '%';
-            requestAnimationFrame(animateBar);
-          }
-        };
-        
-        animateBar();
-        observer.unobserve(bar);
-      }
+        setTimeout(() => {
+            const counterInterval = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    counter.textContent = target;
+                    clearInterval(counterInterval);
+                } else {
+                    counter.textContent = Math.floor(current);
+                }
+            }, 30);
+        }, index * 200);
     });
-  }, { threshold: 0.5 });
-  
-  skillBars.forEach(bar => observer.observe(bar));
+}
+
+// Simple typing effect
+function typingEffect() {
+    const heroGreeting = document.querySelector('.hero-greeting');
+    if (heroGreeting) {
+        const text = heroGreeting.textContent;
+        heroGreeting.textContent = '';
+        heroGreeting.style.opacity = '1';
+        
+        let i = 0;
+        const typeInterval = setInterval(() => {
+            heroGreeting.textContent += text.charAt(i);
+            i++;
+            if (i >= text.length) {
+                clearInterval(typeInterval);
+            }
+        }, 100);
+    }
 }
 
 // Initialize everything
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('📄 DOM ready, initializing advanced effects...');
-  
-  setTimeout(() => {
-    initAdvancedAnimations();
-    initAdvancedHoverEffects();
-    initAdvancedTypingEffect();
-    initFloatingElements();
-    initParallaxEffect();
-    initAdvancedSkillBars();
-  }, 500);
-  
-  setTimeout(() => {
-    initAdvancedCounters();
-  }, 2000);
+    console.log('📄 DOM ready, initializing simple animations...');
+    
+    // Force animations immediately
+    setTimeout(() => {
+        forceAnimations();
+    }, 100);
+    
+    // Add typing effect
+    setTimeout(() => {
+        typingEffect();
+    }, 500);
+    
+    // Add counter animations
+    setTimeout(() => {
+        animateCounters();
+    }, 1000);
 });
 
 // Also run on window load
 window.addEventListener('load', () => {
-  console.log('🔄 Window loaded, running advanced effects...');
-  setTimeout(() => {
-    initAdvancedAnimations();
-    initAdvancedHoverEffects();
-  }, 1000);
+    console.log('🔄 Window loaded, forcing animations...');
+    setTimeout(() => {
+        forceAnimations();
+    }, 500);
 });
+
+// Force animations every 2 seconds as backup
+setInterval(() => {
+    forceAnimations();
+}, 2000);
 
 // Initialize EmailJS
 (function() {

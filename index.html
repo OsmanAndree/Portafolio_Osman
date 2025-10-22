@@ -128,12 +128,55 @@
         .animate-delay-3 { animation-delay: 0.6s; }
         .animate-delay-4 { animation-delay: 0.8s; }
         .animate-delay-5 { animation-delay: 1s; }
+        
+        /* Test banner - MUST be visible */
+        .test-banner {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            background-size: 400% 400%;
+            animation: gradientShift 3s ease infinite, pulse 2s infinite;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transform: scale(1);
+            transition: all 0.3s ease;
+        }
+        
+        .test-banner:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Enhanced hover effects */
+        .hover-effect {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-effect:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
     </style>
     
     <!-- EmailJS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
+    <!-- TEST BANNER - Debe ser visible inmediatamente -->
+    <div class="test-banner">
+        🎬 ANIMACIONES ACTIVAS - Si ves este banner cambiando de colores y pulsando, las animaciones funcionan! 🎬
+    </div>
+    
     <!-- Custom Cursor -->
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
@@ -367,7 +410,7 @@
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header animate-fade-in">
                 <div class="section-badge">
                     <span class="badge-text">Conóceme</span>
                 </div>
@@ -382,7 +425,7 @@
             
             <div class="about-content">
                 <div class="about-main">
-                    <div class="about-card">
+                    <div class="about-card animate-slide-left animate-delay-1">
                         <div class="card-header">
                             <div class="card-icon">
                                 <i class="fas fa-user"></i>
@@ -447,7 +490,7 @@
                 
                 <div class="about-stats">
                     <div class="stats-grid">
-                        <div class="stat-card">
+                        <div class="stat-card animate-scale animate-delay-1">
                             <div class="stat-icon">
                                 <i class="fas fa-project-diagram"></i>
                             </div>
@@ -456,7 +499,7 @@
                                 <span class="stat-label">Proyectos</span>
                             </div>
                         </div>
-                        <div class="stat-card">
+                        <div class="stat-card animate-scale animate-delay-1">
                             <div class="stat-icon">
                                 <i class="fas fa-clock"></i>
                             </div>
@@ -465,7 +508,7 @@
                                 <span class="stat-label">Años Estudiando</span>
                             </div>
                         </div>
-                        <div class="stat-card">
+                        <div class="stat-card animate-scale animate-delay-1">
                             <div class="stat-icon">
                                 <i class="fas fa-code"></i>
                             </div>
@@ -474,7 +517,7 @@
                                 <span class="stat-label">Tecnologías</span>
                             </div>
                         </div>
-                        <div class="stat-card">
+                        <div class="stat-card animate-scale animate-delay-1">
                             <div class="stat-icon">
                                 <i class="fas fa-percentage"></i>
                             </div>
@@ -492,7 +535,7 @@
     <!-- Education Timeline -->
     <section id="education" class="education">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header animate-fade-in">
                 <div class="section-badge">
                     <span class="badge-text">Mi Formación</span>
                 </div>
@@ -548,7 +591,7 @@
     <!-- Skills Section -->
     <section id="skills" class="skills">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header animate-fade-in">
                 <div class="section-badge">
                     <span class="badge-text">Mis Habilidades</span>
                 </div>
@@ -583,7 +626,7 @@
                         </div>
                     </div>
                     
-                    <div class="skill-card" data-category="languages">
+                    <div class="skill-card animate-slide-up animate-delay-2 hover-effect" data-category="languages">
                         <div class="skill-icon">
                             <i class="fab fa-js"></i>
                         </div>
@@ -596,7 +639,7 @@
                         </div>
                     </div>
                     
-                    <div class="skill-card" data-category="languages">
+                    <div class="skill-card animate-slide-up animate-delay-2 hover-effect" data-category="languages">
                         <div class="skill-icon">
                             <i class="fab fa-microsoft"></i>
                         </div>
@@ -609,7 +652,7 @@
                         </div>
                     </div>
                     
-                    <div class="skill-card" data-category="languages">
+                    <div class="skill-card animate-slide-up animate-delay-2 hover-effect" data-category="languages">
                         <div class="skill-icon">
                             <i class="fab fa-android"></i>
                         </div>
@@ -622,7 +665,7 @@
                         </div>
                     </div>
                     
-                    <div class="skill-card" data-category="languages">
+                    <div class="skill-card animate-slide-up animate-delay-2 hover-effect" data-category="languages">
                         <div class="skill-icon">
                             <i class="fab fa-python"></i>
                         </div>
@@ -635,7 +678,7 @@
                         </div>
                     </div>
                     
-                    <div class="skill-card" data-category="languages">
+                    <div class="skill-card animate-slide-up animate-delay-2 hover-effect" data-category="languages">
                         <div class="skill-icon">
                             <i class="fab fa-js"></i>
                         </div>
@@ -827,7 +870,7 @@
     <!-- Certifications Section -->
     <section id="certifications" class="certifications">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header animate-fade-in">
                 <div class="section-badge">
                     <span class="badge-text">Mis Logros</span>
                 </div>
@@ -918,7 +961,7 @@
     <!-- Projects Section -->
     <section id="projects" class="projects">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header animate-fade-in">
                 <div class="section-badge">
                     <span class="badge-text">Mi Trabajo</span>
                 </div>
@@ -972,7 +1015,7 @@
                 </div>
 
                 <!-- Proyecto 2: Plataforma E-commerce -->
-                <div class="project-card" data-category="web">
+                <div class="project-card animate-slide-right animate-delay-1 hover-effect" data-category="web">
                     <div class="project-image">
                         <div class="project-placeholder">
                             <i class="fas fa-shopping-cart"></i>
@@ -1003,7 +1046,7 @@
                 </div>
 
                 <!-- Proyecto 3: App Móvil de Marketplace -->
-                <div class="project-card" data-category="mobile">
+                <div class="project-card animate-slide-left animate-delay-2 hover-effect" data-category="mobile">
                     <div class="project-image">
                         <div class="project-placeholder">
                             <i class="fas fa-store"></i>
@@ -1033,7 +1076,7 @@
                 </div>
 
                 <!-- Proyecto 4: Sistema de Control de Inventario -->
-                <div class="project-card" data-category="desktop">
+                <div class="project-card animate-scale animate-delay-3 hover-effect" data-category="desktop">
                     <div class="project-image">
                         <div class="project-placeholder">
                             <i class="fas fa-warehouse"></i>
@@ -1063,7 +1106,7 @@
                 </div>
 
                 <!-- Proyecto 5: App de Gestión Financiera -->
-                <div class="project-card" data-category="web">
+                <div class="project-card animate-slide-right animate-delay-1 hover-effect" data-category="web">
                     <div class="project-image">
                         <div class="project-placeholder">
                             <i class="fas fa-chart-line"></i>
@@ -1094,7 +1137,7 @@
                 </div>
 
                 <!-- Proyecto 6: Kanban Board -->
-                <div class="project-card" data-category="web">
+                <div class="project-card animate-slide-right animate-delay-1 hover-effect" data-category="web">
                     <div class="project-image">
                         <div class="project-placeholder">
                             <i class="fas fa-tasks"></i>
@@ -1130,7 +1173,7 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header animate-fade-in">
                 <div class="section-badge">
                     <span class="badge-text">Hablemos</span>
                 </div>
