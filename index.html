@@ -42,7 +42,98 @@
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
     
-    <!-- Animaciones eliminadas -->
+    <!-- NUEVO SISTEMA DE ANIMACIONES DESDE CERO -->
+    <style>
+        /* Animaciones básicas que SIEMPRE funcionan */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+        
+        .slide-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUp 0.8s ease-out forwards;
+        }
+        
+        .slide-left {
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: slideLeft 0.8s ease-out forwards;
+        }
+        
+        .slide-right {
+            opacity: 0;
+            transform: translateX(30px);
+            animation: slideRight 0.8s ease-out forwards;
+        }
+        
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.8);
+            animation: scaleIn 0.6s ease-out forwards;
+        }
+        
+        /* Keyframes básicos */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes scaleIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        /* Delays */
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        
+        /* Hover effects básicos */
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .btn-hover {
+            transition: transform 0.3s ease;
+        }
+        
+        .btn-hover:hover {
+            transform: scale(1.05);
+        }
+    </style>
     
     <!-- EmailJS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
@@ -237,7 +328,7 @@
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header fade-in">
                 <div class="section-badge">
                     <span class="badge-text">Conóceme</span>
                 </div>
@@ -252,7 +343,7 @@
             
             <div class="about-content">
                 <div class="about-main">
-                    <div class="about-card">
+                    <div class="about-card slide-left delay-1 card-hover">
                         <div class="card-header">
                             <div class="card-icon">
                                 <i class="fas fa-user"></i>
@@ -317,7 +408,7 @@
                 
                 <div class="about-stats">
                     <div class="stats-grid">
-                        <div class="stat-card">
+                        <div class="stat-card scale-in delay-2 card-hover">
                             <div class="stat-icon">
                                 <i class="fas fa-project-diagram"></i>
                             </div>
@@ -326,7 +417,7 @@
                                 <span class="stat-label">Proyectos</span>
                             </div>
                         </div>
-                        <div class="stat-card">
+                        <div class="stat-card scale-in delay-2 card-hover">
                             <div class="stat-icon">
                                 <i class="fas fa-clock"></i>
                             </div>
@@ -335,7 +426,7 @@
                                 <span class="stat-label">Años Estudiando</span>
                             </div>
                         </div>
-                        <div class="stat-card">
+                        <div class="stat-card scale-in delay-2 card-hover">
                             <div class="stat-icon">
                                 <i class="fas fa-code"></i>
                             </div>
@@ -344,7 +435,7 @@
                                 <span class="stat-label">Tecnologías</span>
                             </div>
                         </div>
-                        <div class="stat-card">
+                        <div class="stat-card scale-in delay-2 card-hover">
                             <div class="stat-icon">
                                 <i class="fas fa-percentage"></i>
                             </div>
@@ -362,7 +453,7 @@
     <!-- Education Timeline -->
     <section id="education" class="education">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header fade-in">
                 <div class="section-badge">
                     <span class="badge-text">Mi Formación</span>
                 </div>
@@ -418,7 +509,7 @@
     <!-- Skills Section -->
     <section id="skills" class="skills">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header fade-in">
                 <div class="section-badge">
                     <span class="badge-text">Mis Habilidades</span>
                 </div>
@@ -453,7 +544,7 @@
                         </div>
                     </div>
                     
-                    <div class="skill-card" data-category="languages">
+                    <div class="skill-card slide-up delay-3 card-hover" data-category="languages">
                         <div class="skill-icon">
                             <i class="fab fa-js"></i>
                         </div>
@@ -466,7 +557,7 @@
                         </div>
                     </div>
                     
-                    <div class="skill-card" data-category="languages">
+                    <div class="skill-card slide-up delay-3 card-hover" data-category="languages">
                         <div class="skill-icon">
                             <i class="fab fa-microsoft"></i>
                         </div>
@@ -479,7 +570,7 @@
                         </div>
                     </div>
                     
-                    <div class="skill-card" data-category="languages">
+                    <div class="skill-card slide-up delay-3 card-hover" data-category="languages">
                         <div class="skill-icon">
                             <i class="fab fa-android"></i>
                         </div>
@@ -492,7 +583,7 @@
                         </div>
                     </div>
                     
-                    <div class="skill-card" data-category="languages">
+                    <div class="skill-card slide-up delay-3 card-hover" data-category="languages">
                         <div class="skill-icon">
                             <i class="fab fa-python"></i>
                         </div>
@@ -505,7 +596,7 @@
                         </div>
                     </div>
                     
-                    <div class="skill-card" data-category="languages">
+                    <div class="skill-card slide-up delay-3 card-hover" data-category="languages">
                         <div class="skill-icon">
                             <i class="fab fa-js"></i>
                         </div>
@@ -697,7 +788,7 @@
     <!-- Certifications Section -->
     <section id="certifications" class="certifications">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header fade-in">
                 <div class="section-badge">
                     <span class="badge-text">Mis Logros</span>
                 </div>
@@ -788,7 +879,7 @@
     <!-- Projects Section -->
     <section id="projects" class="projects">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header fade-in">
                 <div class="section-badge">
                     <span class="badge-text">Mi Trabajo</span>
                 </div>
@@ -842,7 +933,7 @@
                 </div>
 
                 <!-- Proyecto 2: Plataforma E-commerce -->
-                <div class="project-card" data-category="web">
+                <div class="project-card slide-right delay-4 card-hover" data-category="web">
                     <div class="project-image">
                         <div class="project-placeholder">
                             <i class="fas fa-shopping-cart"></i>
@@ -873,7 +964,7 @@
                 </div>
 
                 <!-- Proyecto 3: App Móvil de Marketplace -->
-                <div class="project-card" data-category="mobile">
+                <div class="project-card slide-left delay-5 card-hover" data-category="mobile">
                     <div class="project-image">
                         <div class="project-placeholder">
                             <i class="fas fa-store"></i>
@@ -903,7 +994,7 @@
                 </div>
 
                 <!-- Proyecto 4: Sistema de Control de Inventario -->
-                <div class="project-card" data-category="desktop">
+                <div class="project-card scale-in delay-1 card-hover" data-category="desktop">
                     <div class="project-image">
                         <div class="project-placeholder">
                             <i class="fas fa-warehouse"></i>
@@ -933,7 +1024,7 @@
                 </div>
 
                 <!-- Proyecto 5: App de Gestión Financiera -->
-                <div class="project-card" data-category="web">
+                <div class="project-card slide-right delay-4 card-hover" data-category="web">
                     <div class="project-image">
                         <div class="project-placeholder">
                             <i class="fas fa-chart-line"></i>
@@ -964,7 +1055,7 @@
                 </div>
 
                 <!-- Proyecto 6: Kanban Board -->
-                <div class="project-card" data-category="web">
+                <div class="project-card slide-right delay-4 card-hover" data-category="web">
                     <div class="project-image">
                         <div class="project-placeholder">
                             <i class="fas fa-tasks"></i>
@@ -1000,7 +1091,7 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header fade-in">
                 <div class="section-badge">
                     <span class="badge-text">Hablemos</span>
                 </div>

@@ -286,62 +286,16 @@ filterBtns.forEach((btn) => {
   });
 });
 
-// ULTRA SIMPLE ANIMATION SYSTEM - GUARANTEED TO WORK
-console.log('🎯 Starting Ultra Simple Animation System...');
+// NUEVO SISTEMA DE ANIMACIONES DESDE CERO
+console.log('🎬 Nuevo sistema de animaciones iniciado');
 
-// IMMEDIATE TEST - This should work right away
-// Función de prueba eliminada
-
-// Código de prueba eliminado
-
-// Simple hover effects that ALWAYS work
-function addSimpleHoverEffects() {
-    console.log('🎨 Adding simple hover effects...');
-    
-    // Cards hover effect
-    const cards = document.querySelectorAll('.about-card, .stat-card, .skill-card, .project-card, .certification-card');
-    cards.forEach(card => {
-        card.style.transition = 'all 0.3s ease';
-        
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-5px)';
-            this.style.boxShadow = '0 10px 20px rgba(0,0,0,0.2)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-            this.style.boxShadow = '';
-        });
-    });
-    
-    // Buttons hover effect
-    const buttons = document.querySelectorAll('.btn, .category-btn, .filter-btn');
-    buttons.forEach(button => {
-        button.style.transition = 'all 0.3s ease';
-        
-        button.addEventListener('mouseenter', function() {
-            this.style.transform = 'scale(1.05)';
-            this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
-        });
-        
-        button.addEventListener('mouseleave', function() {
-            this.style.transform = 'scale(1)';
-            this.style.boxShadow = '';
-        });
-    });
-    
-    console.log(`✅ Added hover effects to ${cards.length} cards and ${buttons.length} buttons`);
-}
-
-// Simple counter animation
+// Función simple para animar contadores
 function animateCounters() {
-    console.log('🔢 Animating counters...');
     const counters = document.querySelectorAll('.stat-number');
-    
     counters.forEach((counter, index) => {
         const target = parseInt(counter.getAttribute('data-target'));
         let current = 0;
-        const increment = target / 30;
+        const increment = target / 20;
         
         setTimeout(() => {
             const interval = setInterval(() => {
@@ -357,9 +311,8 @@ function animateCounters() {
     });
 }
 
-// Simple typing effect
+// Función simple para efecto de escritura
 function typeText() {
-    console.log('⌨️ Starting typing effect...');
     const heroGreeting = document.querySelector('.hero-greeting');
     if (heroGreeting) {
         const text = heroGreeting.textContent;
@@ -376,48 +329,18 @@ function typeText() {
     }
 }
 
-// Simple fade in effect
-function fadeInElements() {
-    console.log('✨ Adding fade in effects...');
-    
-    const elements = document.querySelectorAll('.section-header, .about-card, .stat-card, .skill-card, .project-card');
-    
-    elements.forEach((element, index) => {
-        element.style.opacity = '0';
-        element.style.transform = 'translateY(20px)';
-        element.style.transition = 'all 0.6s ease';
-        
-        setTimeout(() => {
-            element.style.opacity = '1';
-            element.style.transform = 'translateY(0)';
-        }, index * 100);
-    });
-    
-    console.log(`✅ Added fade in to ${elements.length} elements`);
-}
-
-// Initialize everything
+// Inicializar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('📄 DOM ready, starting simple animations...');
+    console.log('📄 DOM listo, iniciando animaciones...');
     
-    // Add hover effects immediately
-    addSimpleHoverEffects();
-    
-    // Add fade in effects
-    setTimeout(fadeInElements, 100);
-    
-    // Add typing effect
-    setTimeout(typeText, 500);
-    
-    // Add counter animations
+    // Animar contadores después de un delay
     setTimeout(animateCounters, 1000);
+    
+    // Efecto de escritura
+    setTimeout(typeText, 500);
 });
 
-// Also run on window load
-window.addEventListener('load', function() {
-    console.log('🔄 Window loaded, running simple animations...');
-    setTimeout(addSimpleHoverEffects, 100);
-});
+console.log('✅ Sistema de animaciones cargado');
 
 // Initialize EmailJS
 (function() {
