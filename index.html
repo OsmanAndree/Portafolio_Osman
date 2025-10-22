@@ -42,21 +42,94 @@
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
     
-    <!-- SISTEMA 100% JAVASCRIPT - SIN CSS ANIMATIONS -->
+    <!-- SISTEMA CSS SIMPLE QUE FUNCIONA GARANTIZADO -->
     <style>
-        /* Solo estilos básicos - las animaciones serán 100% JavaScript */
-        .animated-element {
+        /* Animaciones CSS básicas que SIEMPRE funcionan */
+        .fade-in {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.3s ease;
+            animation: fadeIn 1s ease-in-out forwards;
         }
         
+        .slide-up {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 0.8s ease-out forwards;
+        }
+        
+        .slide-left {
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: slideLeft 0.8s ease-out forwards;
+        }
+        
+        .slide-right {
+            opacity: 0;
+            transform: translateX(20px);
+            animation: slideRight 0.8s ease-out forwards;
+        }
+        
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.9);
+            animation: scaleIn 0.6s ease-out forwards;
+        }
+        
+        /* Keyframes básicos */
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes scaleIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        /* Delays */
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+        .delay-5 { animation-delay: 1s; }
+        
+        /* Hover effects básicos */
         .card-hover {
             transition: all 0.3s ease;
         }
         
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
         .btn-hover {
             transition: all 0.3s ease;
+        }
+        
+        .btn-hover:hover {
+            transform: scale(1.05);
         }
     </style>
     
@@ -64,6 +137,27 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
+    <!-- PRUEBA VISUAL - Debe aparecer inmediatamente -->
+    <div style="
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        border-radius: 50%;
+        z-index: 9999;
+        animation: pulse 2s infinite;
+        box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    "></div>
+    
+    <style>
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
     
     
     <!-- Cursor personalizado eliminado -->
@@ -253,7 +347,7 @@
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
-            <div class="section-header animated-element">
+            <div class="section-header fade-in">
                 <div class="section-badge">
                     <span class="badge-text">Conóceme</span>
                 </div>
@@ -268,7 +362,7 @@
             
             <div class="about-content">
                 <div class="about-main">
-                    <div class="about-card animated-element card-hover">
+                    <div class="about-card slide-left delay-1 card-hover">
                         <div class="card-header">
                             <div class="card-icon">
                                 <i class="fas fa-user"></i>
@@ -333,7 +427,7 @@
                 
                 <div class="about-stats">
                     <div class="stats-grid">
-                        <div class="stat-card animated-element card-hover">
+                        <div class="stat-card scale-in delay-2 card-hover">
                             <div class="stat-icon">
                                 <i class="fas fa-project-diagram"></i>
                             </div>
@@ -342,7 +436,7 @@
                                 <span class="stat-label">Proyectos</span>
                             </div>
                         </div>
-                        <div class="stat-card animated-element card-hover">
+                        <div class="stat-card scale-in delay-2 card-hover">
                             <div class="stat-icon">
                                 <i class="fas fa-clock"></i>
                             </div>
@@ -351,7 +445,7 @@
                                 <span class="stat-label">Años Estudiando</span>
                             </div>
                         </div>
-                        <div class="stat-card animated-element card-hover">
+                        <div class="stat-card scale-in delay-2 card-hover">
                             <div class="stat-icon">
                                 <i class="fas fa-code"></i>
                             </div>
@@ -360,7 +454,7 @@
                                 <span class="stat-label">Tecnologías</span>
                             </div>
                         </div>
-                        <div class="stat-card animated-element card-hover">
+                        <div class="stat-card scale-in delay-2 card-hover">
                             <div class="stat-icon">
                                 <i class="fas fa-percentage"></i>
                             </div>
@@ -378,7 +472,7 @@
     <!-- Education Timeline -->
     <section id="education" class="education">
         <div class="container">
-            <div class="section-header animated-element">
+            <div class="section-header fade-in">
                 <div class="section-badge">
                     <span class="badge-text">Mi Formación</span>
                 </div>
@@ -434,7 +528,7 @@
     <!-- Skills Section -->
     <section id="skills" class="skills">
         <div class="container">
-            <div class="section-header animated-element">
+            <div class="section-header fade-in">
                 <div class="section-badge">
                     <span class="badge-text">Mis Habilidades</span>
                 </div>
@@ -469,7 +563,7 @@
                         </div>
                     </div>
                     
-                    <div class="skill-card animated-element card-hover" data-category="languages">
+                    <div class="skill-card slide-up delay-3 card-hover" data-category="languages">
                         <div class="skill-icon">
                             <i class="fab fa-js"></i>
                         </div>
@@ -482,7 +576,7 @@
                         </div>
                     </div>
                     
-                    <div class="skill-card animated-element card-hover" data-category="languages">
+                    <div class="skill-card slide-up delay-3 card-hover" data-category="languages">
                         <div class="skill-icon">
                             <i class="fab fa-microsoft"></i>
                         </div>
@@ -495,7 +589,7 @@
                         </div>
                     </div>
                     
-                    <div class="skill-card animated-element card-hover" data-category="languages">
+                    <div class="skill-card slide-up delay-3 card-hover" data-category="languages">
                         <div class="skill-icon">
                             <i class="fab fa-android"></i>
                         </div>
@@ -508,7 +602,7 @@
                         </div>
                     </div>
                     
-                    <div class="skill-card animated-element card-hover" data-category="languages">
+                    <div class="skill-card slide-up delay-3 card-hover" data-category="languages">
                         <div class="skill-icon">
                             <i class="fab fa-python"></i>
                         </div>
@@ -521,7 +615,7 @@
                         </div>
                     </div>
                     
-                    <div class="skill-card animated-element card-hover" data-category="languages">
+                    <div class="skill-card slide-up delay-3 card-hover" data-category="languages">
                         <div class="skill-icon">
                             <i class="fab fa-js"></i>
                         </div>
@@ -713,7 +807,7 @@
     <!-- Certifications Section -->
     <section id="certifications" class="certifications">
         <div class="container">
-            <div class="section-header animated-element">
+            <div class="section-header fade-in">
                 <div class="section-badge">
                     <span class="badge-text">Mis Logros</span>
                 </div>
@@ -804,7 +898,7 @@
     <!-- Projects Section -->
     <section id="projects" class="projects">
         <div class="container">
-            <div class="section-header animated-element">
+            <div class="section-header fade-in">
                 <div class="section-badge">
                     <span class="badge-text">Mi Trabajo</span>
                 </div>
@@ -858,7 +952,7 @@
                 </div>
 
                 <!-- Proyecto 2: Plataforma E-commerce -->
-                <div class="project-card animated-element card-hover" data-category="web">
+                <div class="project-card slide-right delay-4 card-hover" data-category="web">
                     <div class="project-image">
                         <div class="project-placeholder">
                             <i class="fas fa-shopping-cart"></i>
@@ -889,7 +983,7 @@
                 </div>
 
                 <!-- Proyecto 3: App Móvil de Marketplace -->
-                <div class="project-card animated-element card-hover" data-category="mobile">
+                <div class="project-card slide-left delay-5 card-hover" data-category="mobile">
                     <div class="project-image">
                         <div class="project-placeholder">
                             <i class="fas fa-store"></i>
@@ -919,7 +1013,7 @@
                 </div>
 
                 <!-- Proyecto 4: Sistema de Control de Inventario -->
-                <div class="project-card animated-element card-hover" data-category="desktop">
+                <div class="project-card scale-in delay-1 card-hover" data-category="desktop">
                     <div class="project-image">
                         <div class="project-placeholder">
                             <i class="fas fa-warehouse"></i>
@@ -949,7 +1043,7 @@
                 </div>
 
                 <!-- Proyecto 5: App de Gestión Financiera -->
-                <div class="project-card animated-element card-hover" data-category="web">
+                <div class="project-card slide-right delay-4 card-hover" data-category="web">
                     <div class="project-image">
                         <div class="project-placeholder">
                             <i class="fas fa-chart-line"></i>
@@ -980,7 +1074,7 @@
                 </div>
 
                 <!-- Proyecto 6: Kanban Board -->
-                <div class="project-card animated-element card-hover" data-category="web">
+                <div class="project-card slide-right delay-4 card-hover" data-category="web">
                     <div class="project-image">
                         <div class="project-placeholder">
                             <i class="fas fa-tasks"></i>
@@ -1016,7 +1110,7 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <div class="section-header animated-element">
+            <div class="section-header fade-in">
                 <div class="section-badge">
                     <span class="badge-text">Hablemos</span>
                 </div>
