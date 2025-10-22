@@ -286,61 +286,120 @@ filterBtns.forEach((btn) => {
   });
 });
 
-// NUEVO SISTEMA DE ANIMACIONES DESDE CERO
-console.log('🎬 Nuevo sistema de animaciones iniciado');
+// SISTEMA DE ANIMACIONES PROFESIONALES Y SUAVES
+console.log('🎬 Sistema de animaciones profesionales iniciado');
 
-// Función simple para animar contadores
+// Contadores con easing suave
 function animateCounters() {
     const counters = document.querySelectorAll('.stat-number');
     counters.forEach((counter, index) => {
         const target = parseInt(counter.getAttribute('data-target'));
         let current = 0;
-        const increment = target / 20;
+        const duration = 2000;
+        const startTime = performance.now();
         
         setTimeout(() => {
-            const interval = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    counter.textContent = target;
-                    clearInterval(interval);
+            function animateCounter(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Easing suave (ease-out)
+                const easedProgress = 1 - Math.pow(1 - progress, 3);
+                
+                current = Math.floor(target * easedProgress);
+                counter.textContent = current;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(animateCounter);
                 } else {
-                    counter.textContent = Math.floor(current);
+                    counter.textContent = target;
+                    // Efecto de completado
+                    counter.style.transform = 'scale(1.1)';
+                    setTimeout(() => {
+                        counter.style.transform = 'scale(1)';
+                    }, 200);
                 }
-            }, 50);
-        }, index * 200);
+            }
+            
+            requestAnimationFrame(animateCounter);
+        }, index * 300);
     });
 }
 
-// Función simple para efecto de escritura
+// Efecto de escritura profesional
 function typeText() {
     const heroGreeting = document.querySelector('.hero-greeting');
     if (heroGreeting) {
         const text = heroGreeting.textContent;
         heroGreeting.textContent = '';
+        heroGreeting.style.opacity = '1';
         
         let i = 0;
-        const interval = setInterval(() => {
+        const typeInterval = setInterval(() => {
             heroGreeting.textContent += text.charAt(i);
             i++;
             if (i >= text.length) {
-                clearInterval(interval);
+                clearInterval(typeInterval);
+                // Agregar cursor parpadeante
+                heroGreeting.innerHTML += '<span style="animation: blink 1s infinite;">|</span>';
             }
-        }, 100);
+        }, 80);
     }
 }
 
-// Inicializar cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('📄 DOM listo, iniciando animaciones...');
+// Scroll reveal con Intersection Observer
+function initScrollReveal() {
+    const revealElements = document.querySelectorAll('.scroll-reveal');
     
-    // Animar contadores después de un delay
-    setTimeout(animateCounters, 1000);
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    revealElements.forEach(el => observer.observe(el));
+}
+
+// Efectos hover avanzados
+function initAdvancedHover() {
+    const cards = document.querySelectorAll('.card-hover');
+    
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-8px) scale(1.02) rotateX(2deg)';
+            this.style.boxShadow = '0 20px 40px rgba(0,0,0,0.15)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1) rotateX(0deg)';
+            this.style.boxShadow = '';
+        });
+    });
+}
+
+// Inicializar todo
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('📄 DOM listo, iniciando animaciones profesionales...');
+    
+    // Scroll reveal
+    initScrollReveal();
+    
+    // Hover effects
+    initAdvancedHover();
     
     // Efecto de escritura
     setTimeout(typeText, 500);
+    
+    // Contadores con delay
+    setTimeout(animateCounters, 1500);
 });
 
-console.log('✅ Sistema de animaciones cargado');
+console.log('✅ Sistema de animaciones profesionales cargado');
 
 // Initialize EmailJS
 (function() {
