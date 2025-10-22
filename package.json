@@ -1,0 +1,30 @@
+{
+  "name": "osman-portfolio",
+  "version": "1.0.0",
+  "description": "Portafolio profesional de Osman Barahona - Desarrollador Full Stack",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "serve": "npx http-server -p 8000 -c-1",
+    "build": "echo 'Static site - no build required'",
+    "deploy": "echo 'Ready for deployment'",
+    "validate": "echo 'HTML validation recommended'"
+  },
+  "keywords": [
+    "portfolio",
+    "full-stack",
+    "developer",
+    "react",
+    "nodejs",
+    "python",
+    "javascript",
+    "web-development"
+  ],
+  "author": "Osman Barahona",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OsmanAndree/portfolio"
+  },
+  "homepage": "https://osmanbarahona.dev"
+}
